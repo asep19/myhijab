@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        {{#each results}}
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-product-grid">
+                <!-- gambar -->
+                <div class="img-wrap">
+                    <!-- ikon wishlist -->
+                    <div class="topbar">
+                        <a href="#" class="float-right"><i class="fa fa-heart"></i></a>
+                    </div>
+                    <!-- ikon new/diskon/best seller -->
+                    <span class="topbar">
+                        <span class="badge badge-success"> NEW </span>
+                    </span>
+                    <a href="detail-products.html"><img src="img/photo6172202853343537431.jpg" class="ml-0 mt-0"
+                            style="max-width: 100%; height:auto;"></a>
+                </div>
+                <!-- info produk -->
+                <div class="info-wrap ">
+                    <!-- nama produk -->
+                    <p class="title">{{ nama_produk }}</p>
+                    <!-- harga -->
+                    <div class="price-wrap mt-2">
+                        <small class="price-old"><strike>Rp 550.000</strike></small>
+                        <span class="price font-weight-bolder text-warning">Rp.{{ harga_produk }}</span>
+                    </div>
+                    <!-- ratings -->
+                    <ul class="rating-stars">
+                        <li style="width:80%" class="stars-active">
+                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star"></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star"></i>
+                        </li>
+                    </ul>
+                    <small class="text-muted">34</small>
+                </div>
+            </div> <!-- card // -->
+        </div>
+        {{/each}}
+    </div>
+</div>
