@@ -9,6 +9,7 @@ var expressHbs = require('express-handlebars');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var admin = require('./routes/admin');
+// var produk = require('./routes/product-card')
 
 var app = express();
 
@@ -23,9 +24,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// use routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', admin);
+// app.use('/produk', produk);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
