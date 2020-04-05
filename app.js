@@ -1,15 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var expressHbs = require('express-handlebars');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const expressHbs = require('express-handlebars');
+const fileUpload = require('express-fileupload');
+const busboy = require('then-busboy'); 
+
 
 // routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var admin = require('./routes/admin');
-// var produk = require('./routes/product-card')
+var produk = require('./routes/product-card')
 
 var app = express();
 
@@ -23,12 +26,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileUpload());
 
 // use routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', admin);
-// app.use('/produk', produk);
+app.use('/produk', produk);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
