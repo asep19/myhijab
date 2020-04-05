@@ -14,7 +14,8 @@
                         <th>ID Produk</th>
                         <th>Nama Produk</th>
                         <th>Harga</th>
-                        <th>Stok</th>
+                        <th>Stok</th> 
+                        <th>Foto Produk</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -24,22 +25,24 @@
                         <td>{{ id_produk }}</td>
                         <td>{{ nama_produk }}</td>
                         <td>{{ harga_produk }}</td>
-                        <td>{{ stok }}</td>
+                        <td>{{ stok }}</td> 
+                        <td>{{ foto_produk }}</td>
 
                         <td>
-                            <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="{{ product_id }}"
-                                data-product_name="{{ product_name }}" data-product_price="{{ product_price }}"><i
+                            <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="{{ id_produk }}"
+                                data-nama_produk="{{ nama_produk }}" data-harga_produk="{{ harga_produk }}" data-stok="{{ stok }}"><i
                                     class="fas fa-edit"></i> Edit</a>
                             <a href="javascript:void(0);" class="btn btn-sm btn-danger delete"
-                                data-id="{{ product_id }}"><i class="fas fa-trash"></i> Hapus</a>
+                                data-id="{{ id_produk }}"><i class="fas fa-trash"></i> Hapus</a>
                         </td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </div>
+        {{!-- enctype="multipart/form-data" --}}
         <!-- Modal Add Produk-->
-        <form action="/admin/save" method="post">
+        <form role="form" method="post" action="/admin/save" enctype="multipart/form-data">
             <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -52,17 +55,22 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" name="nama_produk" class="form-control" placeholder="Product Name"
+                                <input type="text" name="nama_produk" class="form-control" placeholder="Nama produk"
                                     required>
                             </div>
-
                             <div class="form-group">
-                                <input type="text" name="harga_produk" class="form-control" placeholder="Price"
+                                <input type="text" name="harga_produk" class="form-control" placeholder="Harga"
                                     required>
                             </div>
+                            <div class="form-group">
+                                <input type="text" name="stok" class="form-control" placeholder="stok" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Foto produk: </label>
+                                <input type="file" id="picture" name="foto_produk" accept="" />
+                            </div> 
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="modal-footer"> 
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
@@ -71,9 +79,8 @@
         </form>
 
         <!-- Modal Update Produk-->
-        <form action="/update" method="post">
-            <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+        <form action="/admin/update" method="post">
+            <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -85,17 +92,17 @@
                         <div class="modal-body">
                             <input type="hidden" name="_method" value="put">
                             <div class="form-group">
-                                <input type="text" name="product_name" class="form-control product_name"
-                                    placeholder="Product Name" required>
-                            </div>
-
+                                <input type="text" name="nama_produk" class="form-control nama_produk" placeholder="Nama Produk" required>
+                            </div> 
                             <div class="form-group">
-                                <input type="text" name="product_price" class="form-control price" placeholder="Price"
-                                    required>
+                                <input type="text" name="harga_produk" class="form-control harga" placeholder="Harga" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="stok" class="form-control stok" placeholder="Stok" required>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" name="id" class="product_id">
+                            <input type="hidden" name="id" class="id_produk">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </div>
@@ -105,21 +112,20 @@
         </form>
 
         <!-- Modal Delete Produk-->
-        <form id="add-row-form" action="/delete" method="post">
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                aria-hidden="true">
+        <form action="/admin/delete" method="post" id="add-row-form">
+            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="myModalLabel">Delete Product</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
                             <strong>Anda yakin mau menghapus data ini?</strong>
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" name="id_produk" class="form-control product_id2" required>
+                            <input type="hidden" name="id" class="form-control id_produk2" required>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-success">Delete</button>
                         </div>
@@ -130,24 +136,26 @@
     </main>
     <!-- page-content" -->
 </div>
-
+<script src="/javascripts/jquery-3.4.1.min.js"></script>
 <script>
     $(document).ready(function () {
         //tampilkan data ke modal untuk edit
         $('#mytable').on('click', '.edit', function () {
-            var product_id = $(this).data('id');
-            var product_name = $(this).data('product_name');
-            var product_price = $(this).data('product_price');
+            var id_produk= $(this).data('id');
+            var nama_produk = $(this).data('nama_produk');
+            var harga_produk = $(this).data('harga_produk');
+            var stok = $(this).data('stok')
             $('#EditModal').modal('show');
-            $('.product_name').val(product_name);
-            $('.price').val(product_price);
-            $('.product_id').val(product_id);
+            $('.nama_produk').val(nama_produk);
+            $('.harga').val(harga_produk); 
+            $('.stok').val(stok); 
+            $('.id_produk').val(id_produk);
         });
         //tampilkan modal hapus record
         $('#mytable').on('click', '.delete', function () {
-            var product_id = $(this).data('id_produk');
+            var id_produk = $(this).data('id');
             $('#DeleteModal').modal('show');
-            $('.product_id2').val(product_id);
+            $('.id_produk2').val(id_produk);
         });
 
     });
